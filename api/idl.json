@@ -1,0 +1,875 @@
+{
+    "version": "0.2.5",
+    "name": "blackgold-stake",
+    "instructions": [
+        {
+            "name": "log",
+            "discriminant": {
+                "type": "u8",
+                "value": 0
+            },
+            "docs": [
+                "Emits an arbitrary log message from the treasury PDA.",
+                "Bytes following the discriminator are logged verbatim.",
+                "Treasury PDA seeds: [\"treasury\"]."
+            ],
+            "accounts": [
+                {
+                    "name": "signer",
+                    "isMut": false,
+                    "isSigner": true
+                }
+            ],
+            "args": []
+        },
+        {
+            "name": "init",
+            "discriminant": {
+                "type": "u8",
+                "value": 1
+            },
+            "docs": [
+                "Initializes the staking program.",
+                "Treasury PDA seeds: [\"treasury\"].",
+                "Vesting PDA seeds: [\"vesting\"]."
+            ],
+            "accounts": [
+                {
+                    "name": "signer",
+                    "isMut": true,
+                    "isSigner": true
+                },
+                {
+                    "name": "mint",
+                    "isMut": false,
+                    "isSigner": false,
+                    "address": "BLKGmSnWUj7EYirCirqgnS1Wvi3JwbCbHk2Ws2baLuNt"
+                },
+                {
+                    "name": "treasury",
+                    "isMut": true,
+                    "isSigner": false
+                },
+                {
+                    "name": "treasuryTokens",
+                    "isMut": true,
+                    "isSigner": false
+                },
+                {
+                    "name": "vesting",
+                    "isMut": true,
+                    "isSigner": false
+                },
+                {
+                    "name": "systemProgram",
+                    "isMut": false,
+                    "isSigner": false,
+                    "address": "11111111111111111111111111111111"
+                },
+                {
+                    "name": "tokenProgram",
+                    "isMut": false,
+                    "isSigner": false,
+                    "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+                },
+                {
+                    "name": "associatedTokenProgram",
+                    "isMut": false,
+                    "isSigner": false,
+                    "address": "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL"
+                }
+            ],
+            "args": []
+        },
+        {
+            "name": "distribute",
+            "discriminant": {
+                "type": "u8",
+                "value": 2
+            },
+            "docs": [
+                "Distributes BLKG from the sender to the treasury for distribution to stakers.",
+                "Treasury PDA seeds: [\"treasury\"].",
+                "Vesting PDA seeds: [\"vesting\"]."
+            ],
+            "accounts": [
+                {
+                    "name": "signer",
+                    "isMut": true,
+                    "isSigner": true
+                },
+                {
+                    "name": "sender",
+                    "isMut": true,
+                    "isSigner": false
+                },
+                {
+                    "name": "mint",
+                    "isMut": false,
+                    "isSigner": false,
+                    "address": "BLKGmSnWUj7EYirCirqgnS1Wvi3JwbCbHk2Ws2baLuNt"
+                },
+                {
+                    "name": "treasury",
+                    "isMut": true,
+                    "isSigner": false
+                },
+                {
+                    "name": "treasuryTokens",
+                    "isMut": true,
+                    "isSigner": false
+                },
+                {
+                    "name": "vesting",
+                    "isMut": true,
+                    "isSigner": false
+                },
+                {
+                    "name": "tokenProgram",
+                    "isMut": false,
+                    "isSigner": false,
+                    "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+                },
+                {
+                    "name": "blkgStakeProgram",
+                    "isMut": false,
+                    "isSigner": false,
+                    "address": "STKCQFJq9qxzNYeF3ggUtYoPmv4GzG1YkvqQZmPgxH3"
+                }
+            ],
+            "args": [
+                {
+                    "name": "amount",
+                    "type": "u64"
+                }
+            ]
+        },
+        {
+            "name": "deposit",
+            "discriminant": {
+                "type": "u8",
+                "value": 10
+            },
+            "docs": [
+                "Deposits BLKG into a staking account.",
+                "Stake PDA seeds: [\"stake\", signer].",
+                "Vesting PDA seeds: [\"vesting\"]."
+            ],
+            "accounts": [
+                {
+                    "name": "signer",
+                    "isMut": true,
+                    "isSigner": true
+                },
+                {
+                    "name": "payer",
+                    "isMut": true,
+                    "isSigner": true
+                },
+                {
+                    "name": "mint",
+                    "isMut": false,
+                    "isSigner": false,
+                    "address": "BLKGmSnWUj7EYirCirqgnS1Wvi3JwbCbHk2Ws2baLuNt"
+                },
+                {
+                    "name": "sender",
+                    "isMut": true,
+                    "isSigner": false
+                },
+                {
+                    "name": "stake",
+                    "isMut": true,
+                    "isSigner": false
+                },
+                {
+                    "name": "stakeTokens",
+                    "isMut": true,
+                    "isSigner": false
+                },
+                {
+                    "name": "treasury",
+                    "isMut": true,
+                    "isSigner": false
+                },
+                {
+                    "name": "vesting",
+                    "isMut": true,
+                    "isSigner": false
+                },
+                {
+                    "name": "systemProgram",
+                    "isMut": false,
+                    "isSigner": false,
+                    "address": "11111111111111111111111111111111"
+                },
+                {
+                    "name": "tokenProgram",
+                    "isMut": false,
+                    "isSigner": false,
+                    "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+                },
+                {
+                    "name": "associatedTokenProgram",
+                    "isMut": false,
+                    "isSigner": false,
+                    "address": "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL"
+                },
+                {
+                    "name": "blkgStakeProgram",
+                    "isMut": false,
+                    "isSigner": false,
+                    "address": "STKCQFJq9qxzNYeF3ggUtYoPmv4GzG1YkvqQZmPgxH3"
+                }
+            ],
+            "args": [
+                {
+                    "name": "amount",
+                    "type": "u64"
+                },
+                {
+                    "name": "compoundFee",
+                    "type": "u64"
+                },
+                {
+                    "name": "compoundFeeDeposit",
+                    "type": "u64"
+                }
+            ]
+        },
+        {
+            "name": "withdraw",
+            "discriminant": {
+                "type": "u8",
+                "value": 11
+            },
+            "docs": [
+                "Withdraws BLKG from a staking account.",
+                "Stake PDA seeds: [\"stake\", signer].",
+                "Vesting PDA seeds: [\"vesting\"]."
+            ],
+            "accounts": [
+                {
+                    "name": "signer",
+                    "isMut": true,
+                    "isSigner": true
+                },
+                {
+                    "name": "mint",
+                    "isMut": false,
+                    "isSigner": false,
+                    "address": "BLKGmSnWUj7EYirCirqgnS1Wvi3JwbCbHk2Ws2baLuNt"
+                },
+                {
+                    "name": "recipient",
+                    "isMut": true,
+                    "isSigner": false
+                },
+                {
+                    "name": "stake",
+                    "isMut": true,
+                    "isSigner": false
+                },
+                {
+                    "name": "stakeTokens",
+                    "isMut": true,
+                    "isSigner": false
+                },
+                {
+                    "name": "treasury",
+                    "isMut": true,
+                    "isSigner": false
+                },
+                {
+                    "name": "vesting",
+                    "isMut": true,
+                    "isSigner": false
+                },
+                {
+                    "name": "systemProgram",
+                    "isMut": false,
+                    "isSigner": false,
+                    "address": "11111111111111111111111111111111"
+                },
+                {
+                    "name": "tokenProgram",
+                    "isMut": false,
+                    "isSigner": false,
+                    "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+                },
+                {
+                    "name": "associatedTokenProgram",
+                    "isMut": false,
+                    "isSigner": false,
+                    "address": "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL"
+                },
+                {
+                    "name": "blkgStakeProgram",
+                    "isMut": false,
+                    "isSigner": false,
+                    "address": "STKCQFJq9qxzNYeF3ggUtYoPmv4GzG1YkvqQZmPgxH3"
+                }
+            ],
+            "args": [
+                {
+                    "name": "amount",
+                    "type": "u64"
+                }
+            ]
+        },
+        {
+            "name": "claim",
+            "discriminant": {
+                "type": "u8",
+                "value": 12
+            },
+            "docs": [
+                "Claims accrued staking rewards.",
+                "Stake PDA seeds: [\"stake\", signer].",
+                "Treasury PDA seeds: [\"treasury\"].",
+                "Vesting PDA seeds: [\"vesting\"]."
+            ],
+            "accounts": [
+                {
+                    "name": "signer",
+                    "isMut": true,
+                    "isSigner": true
+                },
+                {
+                    "name": "mint",
+                    "isMut": false,
+                    "isSigner": false,
+                    "address": "BLKGmSnWUj7EYirCirqgnS1Wvi3JwbCbHk2Ws2baLuNt"
+                },
+                {
+                    "name": "recipient",
+                    "isMut": true,
+                    "isSigner": false
+                },
+                {
+                    "name": "stake",
+                    "isMut": true,
+                    "isSigner": false
+                },
+                {
+                    "name": "treasury",
+                    "isMut": true,
+                    "isSigner": false
+                },
+                {
+                    "name": "treasuryTokens",
+                    "isMut": true,
+                    "isSigner": false
+                },
+                {
+                    "name": "vesting",
+                    "isMut": true,
+                    "isSigner": false
+                },
+                {
+                    "name": "systemProgram",
+                    "isMut": false,
+                    "isSigner": false,
+                    "address": "11111111111111111111111111111111"
+                },
+                {
+                    "name": "tokenProgram",
+                    "isMut": false,
+                    "isSigner": false,
+                    "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+                },
+                {
+                    "name": "associatedTokenProgram",
+                    "isMut": false,
+                    "isSigner": false,
+                    "address": "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL"
+                },
+                {
+                    "name": "blkgStakeProgram",
+                    "isMut": false,
+                    "isSigner": false,
+                    "address": "STKCQFJq9qxzNYeF3ggUtYoPmv4GzG1YkvqQZmPgxH3"
+                }
+            ],
+            "args": [
+                {
+                    "name": "amount",
+                    "type": "u64"
+                }
+            ]
+        },
+        {
+            "name": "compound",
+            "discriminant": {
+                "type": "u8",
+                "value": 13
+            },
+            "docs": [
+                "Compounds accrued staking rewards back into the stake deposit.",
+                "Can be called by anyone (bot-driven). Pays compound fee from the stake account's reserve.",
+                "Stake PDA seeds: [\"stake\", authority].",
+                "Treasury PDA seeds: [\"treasury\"].",
+                "Vesting PDA seeds: [\"vesting\"]."
+            ],
+            "accounts": [
+                {
+                    "name": "signer",
+                    "isMut": true,
+                    "isSigner": true
+                },
+                {
+                    "name": "mint",
+                    "isMut": false,
+                    "isSigner": false,
+                    "address": "BLKGmSnWUj7EYirCirqgnS1Wvi3JwbCbHk2Ws2baLuNt"
+                },
+                {
+                    "name": "stake",
+                    "isMut": true,
+                    "isSigner": false
+                },
+                {
+                    "name": "stakeTokens",
+                    "isMut": true,
+                    "isSigner": false
+                },
+                {
+                    "name": "treasury",
+                    "isMut": true,
+                    "isSigner": false
+                },
+                {
+                    "name": "treasuryTokens",
+                    "isMut": true,
+                    "isSigner": false
+                },
+                {
+                    "name": "vesting",
+                    "isMut": true,
+                    "isSigner": false
+                },
+                {
+                    "name": "systemProgram",
+                    "isMut": false,
+                    "isSigner": false,
+                    "address": "11111111111111111111111111111111"
+                },
+                {
+                    "name": "tokenProgram",
+                    "isMut": false,
+                    "isSigner": false,
+                    "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+                },
+                {
+                    "name": "blkgStakeProgram",
+                    "isMut": false,
+                    "isSigner": false,
+                    "address": "STkEAu2cEyQp5ktgUauRVq8es6mEP2w6ixw4NEd5tDJ"
+                }
+            ],
+            "args": []
+        },
+        {
+            "name": "close",
+            "discriminant": {
+                "type": "u8",
+                "value": 14
+            },
+            "docs": [
+                "Closes an empty stake account and returns rent to the authority.",
+                "Stake PDA seeds: [\"stake\", signer]."
+            ],
+            "accounts": [
+                {
+                    "name": "signer",
+                    "isMut": true,
+                    "isSigner": true
+                },
+                {
+                    "name": "mint",
+                    "isMut": false,
+                    "isSigner": false,
+                    "address": "BLKGmSnWUj7EYirCirqgnS1Wvi3JwbCbHk2Ws2baLuNt"
+                },
+                {
+                    "name": "recipient",
+                    "isMut": true,
+                    "isSigner": false
+                },
+                {
+                    "name": "stake",
+                    "isMut": true,
+                    "isSigner": false
+                },
+                {
+                    "name": "stakeTokens",
+                    "isMut": true,
+                    "isSigner": false
+                },
+                {
+                    "name": "systemProgram",
+                    "isMut": false,
+                    "isSigner": false,
+                    "address": "11111111111111111111111111111111"
+                },
+                {
+                    "name": "tokenProgram",
+                    "isMut": false,
+                    "isSigner": false,
+                    "address": "TokenkegQfeZyiNwAJbNbGKPFXCWuBvf9Ss623VQ5DA"
+                },
+                {
+                    "name": "associatedTokenProgram",
+                    "isMut": false,
+                    "isSigner": false,
+                    "address": "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL"
+                }
+            ],
+            "args": []
+        }
+    ],
+    "accounts": [
+        {
+            "name": "Stake",
+            "discriminator": [
+                108,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
+            "docs": [
+                "State for a staking participant."
+            ],
+            "type": {
+                "kind": "struct",
+                "fields": [
+                    {
+                        "name": "authority",
+                        "type": "publicKey"
+                    },
+                    {
+                        "name": "balance",
+                        "type": "u64"
+                    },
+                    {
+                        "name": "compound_fee",
+                        "type": "u64"
+                    },
+                    {
+                        "name": "compound_fee_reserve",
+                        "type": "u64"
+                    },
+                    {
+                        "name": "last_claim_at",
+                        "type": "i64"
+                    },
+                    {
+                        "name": "last_deposit_at",
+                        "type": "i64"
+                    },
+                    {
+                        "name": "last_withdraw_at",
+                        "type": "i64"
+                    },
+                    {
+                        "name": "rewards_factor",
+                        "type": {
+                            "defined": "Numeric"
+                        }
+                    },
+                    {
+                        "name": "rewards",
+                        "type": "u64"
+                    },
+                    {
+                        "name": "lifetime_rewards",
+                        "type": "u64"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "Treasury",
+            "discriminator": [
+                104,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
+            "docs": [
+                "Singleton treasury account tracking protocol balances and staking yield."
+            ],
+            "type": {
+                "kind": "struct",
+                "fields": [
+                    {
+                        "name": "rewards_factor",
+                        "type": {
+                            "defined": "Numeric"
+                        }
+                    },
+                    {
+                        "name": "total_staked",
+                        "type": "u64"
+                    }
+                ]
+            }
+        },
+        {
+            "name": "Vesting",
+            "discriminator": [
+                109,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
+            "docs": [
+                "Vesting account tracks reward vesting into the treasury."
+            ],
+            "type": {
+                "kind": "struct",
+                "fields": [
+                    {
+                        "name": "initial_amount",
+                        "type": "u64"
+                    },
+                    {
+                        "name": "vested_amount",
+                        "type": "u64"
+                    },
+                    {
+                        "name": "start_time",
+                        "type": "i64"
+                    }
+                ]
+            }
+        }
+    ],
+    "types": [
+        {
+            "name": "Numeric",
+            "docs": [
+                "Fixed-point helper backed by I80F48 from the steel crate."
+            ],
+            "type": {
+                "kind": "struct",
+                "fields": [
+                    {
+                        "name": "bits",
+                        "type": {
+                            "array": [
+                                "u8",
+                                16
+                            ]
+                        }
+                    }
+                ]
+            }
+        }
+    ],
+    "events": [
+        {
+            "name": "ClaimEvent",
+            "discriminator": [
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
+            "fields": [
+                {
+                    "name": "disc",
+                    "type": "u64",
+                    "index": false
+                },
+                {
+                    "name": "authority",
+                    "type": "publicKey",
+                    "index": false
+                },
+                {
+                    "name": "amount",
+                    "type": "u64",
+                    "index": false
+                },
+                {
+                    "name": "ts",
+                    "type": "i64",
+                    "index": false
+                }
+            ]
+        },
+        {
+            "name": "DepositEvent",
+            "discriminator": [
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
+            "fields": [
+                {
+                    "name": "disc",
+                    "type": "u64",
+                    "index": false
+                },
+                {
+                    "name": "authority",
+                    "type": "publicKey",
+                    "index": false
+                },
+                {
+                    "name": "amount",
+                    "type": "u64",
+                    "index": false
+                },
+                {
+                    "name": "ts",
+                    "type": "i64",
+                    "index": false
+                }
+            ]
+        },
+        {
+            "name": "DistributeEvent",
+            "discriminator": [
+                2,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
+            "fields": [
+                {
+                    "name": "disc",
+                    "type": "u64",
+                    "index": false
+                },
+                {
+                    "name": "amount",
+                    "type": "u64",
+                    "index": false
+                },
+                {
+                    "name": "total_staked",
+                    "type": "u64",
+                    "index": false
+                },
+                {
+                    "name": "ts",
+                    "type": "i64",
+                    "index": false
+                }
+            ]
+        },
+        {
+            "name": "WithdrawEvent",
+            "discriminator": [
+                3,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
+            "fields": [
+                {
+                    "name": "disc",
+                    "type": "u64",
+                    "index": false
+                },
+                {
+                    "name": "authority",
+                    "type": "publicKey",
+                    "index": false
+                },
+                {
+                    "name": "amount",
+                    "type": "u64",
+                    "index": false
+                },
+                {
+                    "name": "ts",
+                    "type": "i64",
+                    "index": false
+                }
+            ]
+        },
+        {
+            "name": "CompoundEvent",
+            "discriminator": [
+                4,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+            ],
+            "fields": [
+                {
+                    "name": "disc",
+                    "type": "u64",
+                    "index": false
+                },
+                {
+                    "name": "authority",
+                    "type": "publicKey",
+                    "index": false
+                },
+                {
+                    "name": "amount",
+                    "type": "u64",
+                    "index": false
+                },
+                {
+                    "name": "ts",
+                    "type": "i64",
+                    "index": false
+                }
+            ]
+        }
+    ],
+    "errors": [
+        {
+            "code": 0,
+            "name": "NoDeposits",
+            "msg": "No deposits"
+        },
+        {
+            "code": 1,
+            "name": "InsufficientReserves",
+            "msg": "Insufficient reserves"
+        }
+    ],
+    "metadata": {
+        "address": "STKCQFJq9qxzNYeF3ggUtYoPmv4GzG1YkvqQZmPgxH3",
+        "origin": "steel"
+    }
+}

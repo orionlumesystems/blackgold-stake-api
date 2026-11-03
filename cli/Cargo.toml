@@ -1,0 +1,25 @@
+[package]
+name = "blackgold-stake-cli"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+homepage.workspace = true
+documentation.workspace = true
+repository.workspace = true
+keywords.workspace = true
+publish = false
+
+[dependencies]
+anyhow.workspace = true
+bincode = "1.3.3"
+bytemuck.workspace = true
+blackgold-mint-api.workspace = true
+blackgold-stake-api.workspace = true
+serde.workspace = true
+solana-client.workspace = true
+solana-sdk.workspace = true
+solana-program.workspace = true
+spl-associated-token-account.workspace = true
+spl-token.workspace = true
+steel.workspace = true
+tokio.workspace = true

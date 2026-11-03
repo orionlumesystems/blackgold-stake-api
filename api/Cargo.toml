@@ -1,0 +1,21 @@
+[package]
+name = "blackgold-stake-api"
+description.workspace = true
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+homepage.workspace = true
+documentation.workspace = true
+repository.workspace = true
+keywords.workspace = true
+
+[dependencies]
+bytemuck.workspace = true
+num_enum.workspace = true
+blackgold-mint-api.workspace = true
+serde.workspace = true
+solana-program.workspace = true
+spl-token.workspace = true
+spl-associated-token-account.workspace = true
+steel.workspace = true
+thiserror.workspace = true

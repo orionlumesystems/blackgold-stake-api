@@ -1,0 +1,68 @@
+use steel::*;
+
+#[repr(u8)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq, TryFromPrimitive)]
+pub enum BlackgoldStakeInstruction {
+    // Misc
+    Log = 0,
+    Init = 1,
+    Distribute = 2,
+
+    // Staker
+    Deposit = 10,
+    Withdraw = 11,
+    Claim = 12,
+    Compound = 13,
+    Close = 14,
+}
+
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Pod, Zeroable)]
+pub struct Log {}
+
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Pod, Zeroable)]
+pub struct Deposit {
+    pub amount: [u8; 8],
+    pub compound_fee: [u8; 8],
+    pub compound_fee_deposit: [u8; 8],
+}
+
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Pod, Zeroable)]
+pub struct Withdraw {
+    pub amount: [u8; 8],
+}
+
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Pod, Zeroable)]
+pub struct Claim {
+    pub amount: [u8; 8],
+}
+
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Pod, Zeroable)]
+pub struct Compound {}
+
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Pod, Zeroable)]
+pub struct Distribute {
+    pub amount: [u8; 8],
+}
+
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Pod, Zeroable)]
+pub struct Init {}
+
+#[repr(C)]
+#[derive(Clone, Copy, Debug, Pod, Zeroable)]
+pub struct Close {}
+
+instruction!(BlackgoldStakeInstruction, Log);
+instruction!(BlackgoldStakeInstruction, Init);
+instruction!(BlackgoldStakeInstruction, Distribute);
+instruction!(BlackgoldStakeInstruction, Deposit);
+instruction!(BlackgoldStakeInstruction, Withdraw);
+instruction!(BlackgoldStakeInstruction, Claim);
+instruction!(BlackgoldStakeInstruction, Compound);
+instruction!(BlackgoldStakeInstruction, Close);

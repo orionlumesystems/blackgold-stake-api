@@ -1,0 +1,37 @@
+mod stake;
+mod treasury;
+mod vesting;
+
+pub use stake::*;
+pub use treasury::*;
+pub use vesting::*;
+
+use crate::consts::*;
+
+use blackgold_mint_api::consts::MINT_ADDRESS;
+use steel::*;
+
+#[repr(u8)]
+#[derive(Clone, Copy, Debug, Eq, PartialEq, IntoPrimitive, TryFromPrimitive)]
+pub enum BlackgoldAccount {
+    Treasury = 104,
+    Stake = 108,
+    Vesting = 109,
+}
+
+pub fn stake_pda(authority: Pubkey) -> (Pubkey, u8) {
+    Pubkey::find_program_address(&[STAKE, &authority.to_bytes()], &crate::ID)
+}
+
+pub fn treasury_pda() -> (Pubkey, u8) {
+    Pubkey::find_program_address(&[TREASURY], &crate::ID)
+}
+
+pub fn vesting_pda() -> (Pubkey, u8) {
+    Pubkey::find_program_address(&[VESTING], &crate::ID)
+}
+
+pub fn treasury_tokens_address() -> Pubkey {
+    let treasury_address = treasury_pda().0;
+    spl_associated_token_account::get_associated_token_address(&treasury_address, &MINT_ADDRESS)
+}
