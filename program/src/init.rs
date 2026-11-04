@@ -49,7 +49,8 @@ pub fn process_init(accounts: &[AccountInfo<'_>], _data: &[u8]) -> ProgramResult
             associated_token_program,
         )?;
     } else {
-        treasury_tokens_info.as_associated_token_account(&treasury_info.key, &token_mint_info.key)?;
+        treasury_tokens_info
+            .as_associated_token_account(&treasury_info.key, &token_mint_info.key)?;
     }
 
     // Create vesting account.

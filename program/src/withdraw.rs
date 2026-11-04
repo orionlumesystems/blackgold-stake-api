@@ -19,7 +19,10 @@ pub fn process_withdraw(accounts: &[AccountInfo<'_>], data: &[u8]) -> ProgramRes
     mint_info.has_address(&MINT_ADDRESS)?.as_mint()?;
     recipient_info.is_writable()?;
     let stake = stake_info
-        .has_seeds(&[STAKE, &signer_info.key.to_bytes()], &blackgold_stake_api::ID)?
+        .has_seeds(
+            &[STAKE, &signer_info.key.to_bytes()],
+            &blackgold_stake_api::ID,
+        )?
         .as_account_mut::<Stake>(&blackgold_stake_api::ID)?
         .assert_mut(|s| s.authority == *signer_info.key)?;
     stake_tokens_info

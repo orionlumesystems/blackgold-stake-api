@@ -45,7 +45,7 @@ pub fn process_distribute(accounts: &[AccountInfo<'_>], data: &[u8]) -> ProgramR
         .as_associated_token_account(&treasury_info.key, &MINT_ADDRESS)?;
 
     token_program.is_program(&spl_token::ID)?;
-    
+
     blackgold_stake_program.is_program(&blackgold_stake_api::ID)?;
 
     // Vest any unvested TOKEN into the treasury.

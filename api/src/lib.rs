@@ -15,5 +15,5 @@ pub mod prelude {
 }
 
 use steel::*;
-
+// The program ID for the Blackgold Stake program.
 declare_id!("STKCQFJq9qxzNYeF3ggUtYoPmv4GzG1YkvqQZmPgxH3");

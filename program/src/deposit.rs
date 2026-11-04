@@ -19,7 +19,7 @@ pub fn process_deposit(accounts: &[AccountInfo<'_>], data: &[u8]) -> ProgramResu
     };
 
     signer_info.is_signer()?;
-    
+
     payer_info.is_signer()?;
     
     mint_info.has_address(&MINT_ADDRESS)?.as_mint()?;
